@@ -189,26 +189,47 @@ def MoveMouse(dx, dy):
     x = Input( ctypes.c_ulong(0), ii_ )
     ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-def MouseDown():
+def MouseLDown():
     extra = ctypes.c_ulong(0)
     ii_ = Input_I()
     ii_.mi = MouseInput(0,0,0,0x0002,0,ctypes.pointer(extra))
     x = Input( ctypes.c_ulong(0), ii_ )
     ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-def MouseUp():
+def MouseLUp():
     extra = ctypes.c_ulong(0)
     ii_ = Input_I()
     ii_.mi = MouseInput(0,0,0,0x0004,0,ctypes.pointer(extra))
     x = Input( ctypes.c_ulong(0), ii_ )
     ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-def MousePress(dx, dy):
+def MouseLPress(dx, dy):
     MoveMouse(dx, dy)
     Delay(STATIC_DELAY)
-    MouseDown()
+    MouseLDown()
     Delay(STATIC_DELAY)
-    MouseUp()
+    MouseLUp()
+
+def MouseRDown():
+    extra = ctypes.c_ulong(0)
+    ii_ = Input_I()
+    ii_.mi = MouseInput(0,0,0,0x0008,0,ctypes.pointer(extra))
+    x = Input( ctypes.c_ulong(0), ii_ )
+    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+def MouseRUp():
+    extra = ctypes.c_ulong(0)
+    ii_ = Input_I()
+    ii_.mi = MouseInput(0,0,0,0x0010,0,ctypes.pointer(extra))
+    x = Input( ctypes.c_ulong(0), ii_ )
+    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+def MouseRPress(dx, dy):
+    MoveMouse(dx, dy)
+    Delay(STATIC_DELAY)
+    MouseRDown()
+    Delay(STATIC_DELAY)
+    MouseRUp()
 
 def MouseDrag(dx1, dy1, dx2, dy2):
     MoveMouse(dx1, dy1)
@@ -227,11 +248,3 @@ def SwitchToWindow(title):
     win32com.client.Dispatch("WScript.Shell").AppActivate(title)
 
 STATIC_DELAY = 0.1
-
-# Delay(3)
-# MouseDrag(536,600,633,600)
-# MousePress(1011,858)
-# SwitchToWindow("Untitled - Notepad")
-# KeyDown("LSHIFT")
-# KeyPress("D")
-# KeyUp("LSHIFT")
