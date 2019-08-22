@@ -1,11 +1,12 @@
-# Welcome to PyMacro
+# Welcome to PyMacroV2
 Platform: Windows  
 Python: 3.7  
-Description:  
-It was deprecated due to compatability issues with pynput.  
-Want to automate boring repeated actions? Here you can automate anything with ease.
+Description: Want to automate boring repeated actions? Here you can automate anything with ease.
 
-# How to use
+PyMacro was deprecated due to compatability issues with pynput.  
+After a while, PyMacroV2 is introduced for replacement of PyMacro.  
+
+# How to use PyMacroV2.py
 Basic keystrokes simulations:
 - ```KeyDown(key)``` presses ```key```
 - ```KeyUp(key)``` releases ```key```
@@ -13,7 +14,7 @@ Basic keystrokes simulations:
 Intermediate mouse simulations:
 - ```KeyPress(key)``` pressess and releases ```key```
 
-Note: Values of ```key``` can be found at [here](https://github.com/admin-ll55/PyMacro-for-game-automation-keystroke-simulation/blob/master/PyMacro.py#L7).
+Note: Values of ```key``` can be found at [here](https://pynput.readthedocs.io/en/latest/keyboard.html).
 
 Basic mouse simulations:
 - ```MoveMouse(dx, dy)``` moves to (```dx```,```dy```) coordinate in terms of pixels
@@ -29,20 +30,52 @@ Intermediate mouse simulations:
 - ```MouseRDrag(dx1, dy1, dx2, dy2)``` uses right click to drag an object located at (```dx1```,```dy1```) to (```dx2```,```dy2```) in terms of pixels
 
 MISC:
+- ```Key_(char)``` is used for key translations, see the simple example for the usage.
 - ```SwitchToWindow(title)``` switches to the window with title ```title```
 - ```Delay(sec)``` delays or waits for ```sec``` second(s)
 - ```STATIC_DELAY``` is used between basic simulations in intermediate simulations
 
-Example:
+Simple example:
 ```python
-from PyMacro import *
+from PyMacroV2 import *
 STATIC_DELAY = 1/3
 SwitchToWindow("Untitled - Notepad")
 Delay(1)
-KeyDown("LSHIFT")
-KeyPress("N")
-KeyPress("I")
-KeyUp("LSHIFT")
-KeyPress("C")
-KeyPress("E")
+KeyPress(Key_('N'))
+KeyPress(Key_('I'))
+KeyDown(Key.shift_l)
+KeyPress(Key_('c'))
+KeyPress(Key_('e'))
+KeyUp(Key.shift_l)
+```
+
+Key binding macro example (refer to PyMacroV2_driver.py):
+- In this part, macros are stored in each individual function:
+```python
+# Your macros & normal py codes
+_1 = {"x":680,"y":880}
+
+def macro_1():
+    MouseLPress(_1["x"],_1["y"])
+
+def macro_f1():
+    MouseLPress(_1["x"]*1.1,_1["y"]*1.1)
+```
+- In this part, keys are mapped and binded to the corresponding function:
+```python
+# Map keys to the corresponding function
+# Value of key at https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
+combination_to_function = {
+    frozenset([Key_('1')]): macro_1, # Pressing key "1" executes "macro_1"
+    frozenset([Key.f1]): macro_f1 # Pressing key "F1" executes "macro_f1"
+}
+```
+- More example:
+```python
+def macro_s1():
+    MouseLDrag(_1["x"],_1["y"],_1["x"]+100,_1["y"])
+
+combination_to_function = {
+    frozenset([Key.shift_l, Key_('1')]): macro_s1 # Pressing key "1" and "left shift" executes "macro_s1"
+}
 ```
