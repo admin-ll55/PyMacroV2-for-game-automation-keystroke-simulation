@@ -1,5 +1,5 @@
 # FAQ
-Q: The simulation is not running after I ran the py script.
+Q: The simulation is not running after I ran the py script.  
 A: Start an Administrator Command Prompt, type the full path of the py script and press Enter. You will need to close the Administrator Command Prompt and repeat this step whenever the target game is restarted (after crashing?). If this cannot resolve your problem, please open an issue.
 
 # Welcome to PyMacroV2
