@@ -1,6 +1,8 @@
 # Welcome to PyMacro
 Platform: Windows  
 Python: 3.7  
+Description:  
+It was deprecated due to compatability issues with pynput.  
 Want to automate boring repeated actions? Here you can automate anything with ease.
 
 # How to use
