@@ -1,9 +1,14 @@
 from math import *
 import pynput
-import time, win32gui, win32con, win32com
+from pynput.keyboard import Key, KeyCode
+from pynput.mouse import Button
+import time, win32gui, win32con, win32com.client
 
 _mouse = pynput.mouse.Controller()
 _keyboard = pynput.keyboard.Controller()
+
+def Key_(char):
+    return KeyCode(char=char)
 
 def KeyDown(key):
     _keyboard.press(key)

@@ -14,7 +14,7 @@ def macro_f1():
 # Map keys to the corresponding function
 # Value of key at https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
 combination_to_function = {
-    frozenset([KeyCode(char='1')]): macro_1, # Pressing key "1" executes "macro_1"
+    frozenset([Key_('1')]): macro_1, # Pressing key "1" executes "macro_1"
     frozenset([Key.f1]): macro_f1 # Pressing key "F1" executes "macro_f1"
 }
 
