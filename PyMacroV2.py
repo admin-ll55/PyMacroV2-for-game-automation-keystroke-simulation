@@ -75,4 +75,10 @@ def SwitchToWindow(title):
     win32gui.ShowWindow(win32gui.FindWindow(None, title), win32con.SW_RESTORE)
     win32com.client.Dispatch("WScript.Shell").AppActivate(title)
 
+def MoveWindow(title, x, y):
+    SwitchToWindow(title)
+    hwnd = win32gui.FindWindow(None, title)
+    rect = win32gui.GetWindowRect(hwnd)
+    win32gui.MoveWindow(hwnd, x, y, rect[2]-rect[0], rect[3]-rect[1], True)
+
 STATIC_DELAY = 0.1
