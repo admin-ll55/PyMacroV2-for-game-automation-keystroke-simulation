@@ -2,6 +2,7 @@ from math import *
 import pynput
 from pynput.keyboard import Key, KeyCode
 from pynput.mouse import Button
+from imagesearch import *
 import time, win32gui, win32con, win32com.client
 
 _mouse = pynput.mouse.Controller()
@@ -87,5 +88,8 @@ def MoveWindow(title, x, y):
         hwnd = win32gui.FindWindow(None, title)
         rect = win32gui.GetWindowRect(hwnd)
         win32gui.MoveWindow(hwnd, x, y, rect[2]-rect[0], rect[3]-rect[1], True)
+
+def FindImage(fn, x1, y1, x2, y2, precision):
+    return imagesearcharea(fn, x1, y1, x2, y2, precision, region_grabber((x1, y1, x2, y2)))
 
 STATIC_DELAY = 0.1
