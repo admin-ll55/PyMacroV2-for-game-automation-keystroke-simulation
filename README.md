@@ -8,7 +8,10 @@ Python: 3.7
 Description: Want to automate boring repeated actions? Here you can automate anything with ease.
 
 PyMacro was deprecated due to compatability issues with pynput.  
-After a while, PyMacroV2 is introduced for replacement of PyMacro.  
+After a while, PyMacroV2 is introduced for replacement of PyMacro.
+
+# PyMacroV2 Acknowledgement
+- [python-imagesearch by drov0](https://github.com/drov0/python-imagesearch)
 
 # How to use PyMacroV2.py
 Basic keystrokes simulations:
