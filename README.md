@@ -10,6 +10,9 @@ Description: Want to automate boring repeated actions? Here you can automate any
 PyMacro was deprecated due to compatability issues with pynput.  
 After a while, PyMacroV2 is introduced for replacement of PyMacro.
 
+# PyMacroV2 Prerequisite
+- ```pip3 install -r requirements.txt```
+
 # PyMacroV2 Acknowledgement
 - [python-imagesearch by drov0](https://github.com/drov0/python-imagesearch)
 
