@@ -88,8 +88,10 @@ def ShowWindowByHWND(hwnd):
 
 def SwitchToWindow(title):
     if WindowExists(title):
-        MinimizeWindow(title)
-        win32gui.ShowWindow(win32gui.FindWindow(None, title), win32con.SW_RESTORE)
+        hwnd = win32gui.FindWindow(None, title)
+        win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
+        win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+        win32com.client.Dispatch("WScript.Shell").AppActivate(title)
 
 def MinimizeWindow(title):
     if WindowExists(title):
