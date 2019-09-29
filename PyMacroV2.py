@@ -82,10 +82,18 @@ def WindowExists(title):
         return False
     return True
 
+def ShowWindowByHWND(hwnd):
+    win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
+    win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+
 def SwitchToWindow(title):
     if WindowExists(title):
+        MinimizeWindow(title)
         win32gui.ShowWindow(win32gui.FindWindow(None, title), win32con.SW_RESTORE)
-        win32com.client.Dispatch("WScript.Shell").AppActivate(title)
+
+def MinimizeWindow(title):
+    if WindowExists(title):
+        win32gui.ShowWindow(win32gui.FindWindow(None, title), win32con.SW_MINIMIZE)
 
 def MoveWindow(title, x, y):
     if WindowExists(title):
@@ -104,6 +112,17 @@ def SaveImage(fn, x1, y1, x2, y2):
         im.thumbnail((round(im.size[0] * 0.5), round(im.size[1] * 0.5)))
     im.save(fn+".png")
 
+def MoveToImage(fn, x1, y1, x2, y2, precision):
+    pos = FindImage(fn, x1, y1, x2, y2, precision)
+    if pos[0] == -1:
+      # print("[debug]"+fn+" not found in ("+str(x1)+","+str(y1)+","+str(x2)+","+str(y2)+")") # debug
+      return False
+    img = cv2.imread(fn)
+    height, width, channels = img.shape
+    # print("[debug]clicked at ("+str(pos[0])+","+str(pos[0])+")") # debug
+    MoveMouse(pos[0]+width/2, pos[1]+height/2)
+    return True
+
 def ClickOnImage(fn, x1, y1, x2, y2, precision):
     pos = FindImage(fn, x1, y1, x2, y2, precision)
     if pos[0] == -1:
@@ -114,6 +133,12 @@ def ClickOnImage(fn, x1, y1, x2, y2, precision):
     # print("[debug]clicked at ("+str(pos[0])+","+str(pos[0])+")") # debug
     MouseLPress(pos[0]+width/2, pos[1]+height/2)
     return True
+
+def ALT_TAB():
+    KeyDown(Key.alt)
+    KeyDown(Key.tab)
+    KeyUp(Key.tab)
+    KeyUp(Key.alt)
 
 STATIC_DELAY = 0.1
 
