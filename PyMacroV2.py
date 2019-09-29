@@ -140,7 +140,7 @@ def ClickOnImageLoop(fn, x1, y1, x2, y2, precision, sec):
     pos = FindImage(fn, x1, y1, x2, y2, 0.8)
     while pos[0] == -1:
       print("[debug]Retrying "+fn)
-      pos = FindImage("05_game_setting_button.png", 0, 0, x, y, 0.8)
+      pos = FindImage(fn, x1, y1, x2, y2, 0.8)
       Delay(sec)
     img = cv2.imread(fn)
     height, width, channels = img.shape
