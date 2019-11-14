@@ -83,8 +83,16 @@ def WindowExists(title):
     return True
 
 def ShowWindowByHWND(hwnd):
-    win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
-    win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+    # win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
+    # win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+    while True:
+        try:
+            win32gui.ShowWindow(hwnd, win32con.SW_SHOWNOACTIVATE)
+            win32gui.ShowWindow(hwnd, win32con.SW_SHOW)
+            win32gui.SetForegroundWindow(hwnd)
+            break
+        except:
+            pass
 
 def SwitchToWindow(title):
     if WindowExists(title):
